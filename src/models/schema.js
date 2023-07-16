@@ -34,14 +34,14 @@ export const schema = {
                 "height": {
                     "name": "height",
                     "isArray": false,
-                    "type": "Float",
+                    "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
                 "weight": {
                     "name": "weight",
                     "isArray": false,
-                    "type": "Float",
+                    "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -487,5 +487,5 @@ export const schema = {
     },
     "nonModels": {},
     "codegenVersion": "3.4.4",
-    "version": "75a43ccdcb194a33a847964c3c02c8cc"
+    "version": "8a70e03220aaab56fb55ebf16eb8a66e"
 };

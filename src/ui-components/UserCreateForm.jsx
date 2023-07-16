@@ -249,13 +249,9 @@ export default function UserCreateForm(props) {
         label="Height"
         isRequired={false}
         isReadOnly={false}
-        type="number"
-        step="any"
         value={height}
         onChange={(e) => {
-          let value = isNaN(parseFloat(e.target.value))
-            ? e.target.value
-            : parseFloat(e.target.value);
+          let { value } = e.target;
           if (onChange) {
             const modelFields = {
               name,
@@ -284,13 +280,9 @@ export default function UserCreateForm(props) {
         label="Weight"
         isRequired={false}
         isReadOnly={false}
-        type="number"
-        step="any"
         value={weight}
         onChange={(e) => {
-          let value = isNaN(parseFloat(e.target.value))
-            ? e.target.value
-            : parseFloat(e.target.value);
+          let { value } = e.target;
           if (onChange) {
             const modelFields = {
               name,

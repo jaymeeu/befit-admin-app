@@ -1,0 +1,14 @@
+{
+  "resourceName": "s3befitfitnesstrackerstorage1afc3b94",
+  "bucketName": "befit-fitness-tracker-storage-1afc3b94",
+  "policyUUID": "f24acb13",
+  "storageAccess": "authAndGuest",
+  "guestAccess": [
+    "READ"
+  ],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ]
+}

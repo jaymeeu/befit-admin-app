@@ -18,5 +18,11 @@ export type AmplifyDependentResourcesAttributes = {
       "UserPoolId": "string",
       "UserPoolName": "string"
     }
+  },
+  "storage": {
+    "s3befitfitnesstrackerstorage1afc3b94": {
+      "BucketName": "string",
+      "Region": "string"
+    }
   }
 }

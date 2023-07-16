@@ -17,8 +17,8 @@ export declare type UserUpdateFormInputValues = {
     name?: string;
     email?: string;
     age?: number;
-    height?: number;
-    weight?: number;
+    height?: string;
+    weight?: string;
     sub?: string;
     gender?: string;
     isAdmin?: boolean;
@@ -27,8 +27,8 @@ export declare type UserUpdateFormValidationValues = {
     name?: ValidationFunction<string>;
     email?: ValidationFunction<string>;
     age?: ValidationFunction<number>;
-    height?: ValidationFunction<number>;
-    weight?: ValidationFunction<number>;
+    height?: ValidationFunction<string>;
+    weight?: ValidationFunction<string>;
     sub?: ValidationFunction<string>;
     gender?: ValidationFunction<string>;
     isAdmin?: ValidationFunction<boolean>;

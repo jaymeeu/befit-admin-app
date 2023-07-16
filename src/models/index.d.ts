@@ -24,8 +24,8 @@ type EagerUser = {
   readonly name?: string | null;
   readonly email: string;
   readonly age?: number | null;
-  readonly height?: number | null;
-  readonly weight?: number | null;
+  readonly height?: string | null;
+  readonly weight?: string | null;
   readonly workouts?: (Workout | null)[] | null;
   readonly sub: string;
   readonly gender?: Gender | keyof typeof Gender | null;
@@ -43,8 +43,8 @@ type LazyUser = {
   readonly name?: string | null;
   readonly email: string;
   readonly age?: number | null;
-  readonly height?: number | null;
-  readonly weight?: number | null;
+  readonly height?: string | null;
+  readonly weight?: string | null;
   readonly workouts: AsyncCollection<Workout>;
   readonly sub: string;
   readonly gender?: Gender | keyof typeof Gender | null;
