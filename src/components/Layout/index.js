@@ -1,6 +1,6 @@
 import { useState, useEffect, Fragment } from "react";
-import SideBar from "./SideBar";
 import TopBar from "./TopBar";
+import SideBar from "./SideBar";
 
 export default function Layout({ children }) {
   const [showNav, setShowNav] = useState(true);

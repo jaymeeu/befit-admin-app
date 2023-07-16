@@ -1,10 +1,10 @@
 import React from "react";
 
-const Users = () => {
+const Workouts = () => {
   return (
     <div className="flex h-[calc(100vh-90px)] bg-zinc-50 p-6 gap-6">
       <div className=" shadow-xl rounded-lg flex-1 p-5 border overflow-scroll ">
-        <p className="text-lg font-bold "> Users </p>
+        <p className="text-lg font-bold "> Workouts </p>
         <div className="flex items-center  mx-auto border-b py-5 mb-5 border-gray-200 sm:flex-row flex-col cursor-pointer select-none ">
           <div className="h-16 w-16 sm:mr-5 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 flex-shrink-0 text-2xl">
             A
@@ -35,4 +35,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default Workouts;

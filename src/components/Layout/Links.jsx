@@ -62,15 +62,15 @@ export const links = [
         active_icon: <FaUserAlt size={24} className=" text-black cursor-pointer" />,
     },
     {
-        title: "Activities",
-        to: '/activities',
+        title: "Exercises",
+        to: '/exercises',
         icon: <MdShowChart size={22} className=" text-gray-700 cursor-pointer" />,
         active_icon: <MdShowChart size={24} className=" text-black cursor-pointer" />,
     },
    
     {
-        title: "Poaches",
-        to: '/poaches',
+        title: "Workouts",
+        to: '/workouts',
         icon: <HiOutlineSpeakerphone size={22} className=" text-gray-700 cursor-pointer" />,
         active_icon: <HiSpeakerphone size={24} className=" text-black cursor-pointer" />,
     },
