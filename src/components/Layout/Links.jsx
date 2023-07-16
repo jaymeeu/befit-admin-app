@@ -56,18 +56,18 @@ export const links = [
         active_icon: <HiChartPie size={24} className=" text-black cursor-pointer" />,
     },
     {
+        title: "Users",
+        to: '/users',
+        icon: <FaRegUser size={22} className=" text-gray-700 cursor-pointer" />,
+        active_icon: <FaUserAlt size={24} className=" text-black cursor-pointer" />,
+    },
+    {
         title: "Activities",
         to: '/activities',
         icon: <MdShowChart size={22} className=" text-gray-700 cursor-pointer" />,
         active_icon: <MdShowChart size={24} className=" text-black cursor-pointer" />,
     },
-    {
-        title: "Users",
-        to: '/users',
-        otherlinks : ['/talent'],
-        icon: <FaRegUser size={22} className=" text-gray-700 cursor-pointer" />,
-        active_icon: <FaUserAlt size={24} className=" text-black cursor-pointer" />,
-    },
+   
     {
         title: "Poaches",
         to: '/poaches',
