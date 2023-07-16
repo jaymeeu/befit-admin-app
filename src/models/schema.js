@@ -177,7 +177,7 @@ export const schema = {
                     "type": {
                         "model": "Exercise"
                     },
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": [],
                     "isArrayNullable": true,
                     "association": {
@@ -329,17 +329,17 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "workoutID": {
-                    "name": "workoutID",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
                 "image": {
                     "name": "image",
                     "isArray": false,
                     "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "workoutID": {
+                    "name": "workoutID",
+                    "isArray": false,
+                    "type": "ID",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -487,5 +487,5 @@ export const schema = {
     },
     "nonModels": {},
     "codegenVersion": "3.4.4",
-    "version": "8a70e03220aaab56fb55ebf16eb8a66e"
+    "version": "5df82dccc07d194d19c7777259e72145"
 };

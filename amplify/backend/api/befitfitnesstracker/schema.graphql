@@ -30,7 +30,7 @@ type Workout @model @auth(rules: [{allow: public}]) {
   date: String!
   duration: Int!
   caloriesBurned: Int!
-  exercises: [Exercise!] @hasMany(indexName: "byWorkout", fields: ["id"])
+  exercises: [Exercise] @hasMany(indexName: "byWorkout", fields: ["id"])
   userID: ID! @index(name: "byUser")
   level: Level!
   progress: Int
@@ -46,8 +46,8 @@ type Exercise @model @auth(rules: [{allow: public}]) {
   sets: Int!
   reps: Int!
   duration: Int!
-  workoutID: ID! @index(name: "byWorkout")
   image: String
+  workoutID: ID @index(name: "byWorkout")
 }
 
 type Achievement @model @auth(rules: [{allow: public}]) {

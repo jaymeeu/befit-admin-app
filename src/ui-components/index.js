@@ -7,5 +7,7 @@
 export { default as studioTheme } from "./studioTheme";
 export { default as UserCreateForm } from "./UserCreateForm";
 export { default as UserUpdateForm } from "./UserUpdateForm";
+export { default as ExerciseCreateForm } from "./ExerciseCreateForm";
+export { default as ExerciseUpdateForm } from "./ExerciseUpdateForm";
 export { default as AchievementCreateForm } from "./AchievementCreateForm";
 export { default as AchievementUpdateForm } from "./AchievementUpdateForm";

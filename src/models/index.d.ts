@@ -70,7 +70,7 @@ type EagerWorkout = {
   readonly date: string;
   readonly duration: number;
   readonly caloriesBurned: number;
-  readonly exercises?: Exercise[] | null;
+  readonly exercises?: (Exercise | null)[] | null;
   readonly userID: string;
   readonly level: Level | keyof typeof Level;
   readonly progress?: number | null;
@@ -121,8 +121,8 @@ type EagerExercise = {
   readonly sets: number;
   readonly reps: number;
   readonly duration: number;
-  readonly workoutID: string;
   readonly image?: string | null;
+  readonly workoutID?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -137,8 +137,8 @@ type LazyExercise = {
   readonly sets: number;
   readonly reps: number;
   readonly duration: number;
-  readonly workoutID: string;
   readonly image?: string | null;
+  readonly workoutID?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
