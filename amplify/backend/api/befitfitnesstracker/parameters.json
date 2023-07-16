@@ -1,0 +1,6 @@
+{
+  "AppSyncApiName": "befitfitnesstracker",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthModeLastUpdated": "2023-07-11T13:54:28.442Z"
+}

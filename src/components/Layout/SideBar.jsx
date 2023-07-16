@@ -2,7 +2,7 @@ import { HiMenuAlt3 } from 'react-icons/hi'
 import blakskill from '../../assets/pushup.jpeg'
 import icon from '../../assets/pushup.jpeg'
 import Links from './Links';
-import { useLocation, useNavigate, useNavigation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const SideBar = ({ showNav, setShowNav, isMobile }) => {
   //   const router = useRouter();

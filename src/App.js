@@ -4,6 +4,13 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Users from "./pages/Users";
 import Exercises from "./pages/Exercises";
 import Workouts from "./pages/Workouts";
+import { Amplify } from 'aws-amplify';
+import awsconfig from './aws-exports';
+import {withAuthenticator} from "@aws-amplify/ui-react"
+import '@aws-amplify/ui-react/styles.css';
+
+Amplify.configure(awsconfig);
+
 
 const App = () => {
   return (
@@ -20,4 +27,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default withAuthenticator(App);

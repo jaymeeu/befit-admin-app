@@ -1,14 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { FiPieChart } from 'react-icons/fi'
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { HiChartPie, HiOutlineSpeakerphone, HiSpeakerphone } from 'react-icons/hi'
-import { HiOutlineRectangleStack, HiRectangleStack } from 'react-icons/hi2'
-import { MdShowChart, MdOutlinePayments, MdPayments } from 'react-icons/md'
-import { FaRegUser, FaRegUserCircle, FaUserCircle, FaUserAlt, FaRegFolder, FaFolder } from 'react-icons/fa'
+import { MdShowChart } from 'react-icons/md'
+import { FaRegUser, FaRegUserCircle, FaUserCircle, FaUserAlt} from 'react-icons/fa'
 import { FiBox, FiCodesandbox } from 'react-icons/fi'
-import { BsTag, BsTagFill, BsCreditCard2Back, BsCreditCard2BackFill } from 'react-icons/bs'
-import { IoNotificationsOutline, IoNotificationsSharp, IoSettingsOutline, IoSettingsSharp } from 'react-icons/io5'
-import { AiOutlineCode, AiFillCode } from 'react-icons/ai'
 
 const Links = ({ showNav, path }) => {
 

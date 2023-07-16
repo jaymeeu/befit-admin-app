@@ -1,8 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import pushup from "../assets/pushup.jpeg";
 import FormInput from "../components/FormInput";
+import {Exercise} from '../models'
+import { DataStore, Storage } from "aws-amplify";
 
 const Exercises = () => {
+
+
+  const [all, setAll] = useState([]);
+  const [clicked, setClicked] = useState({});
+
+  const fetchall = async () => {
+    try {
+      const res = await DataStore.query(Exercise);
+      setAll(res);
+    } catch (error) {
+      console.log(error, "eoorr");
+    }
+  };
+
+  useEffect(() => {
+    fetchall();
+  }, []);
+
   const [exercise, setexerice] = useState({
     name: "",
     sets: "",
@@ -18,9 +38,27 @@ const Exercises = () => {
 
   const [addClicked, setaddClicked] = useState(false);
 
-  const handleSubmit = () => {
+  const convertToSlug = (input) => {
+    let slug = input.toLowerCase();
+    slug = slug.replace(/[^\w\s-]/g, '');
+    slug = slug.replace(/\s+/g, '-');
+    slug = slug.replace(/--+/g, '-');
+    slug = slug.replace(/^-+|-+$/g, '');
+   const randomString = Math.random().toString(36).substring(2, 6);
+   const finalSlug = `${slug}-${randomString}`;
+   return finalSlug;
+ }
+
+
+  const handleSubmit = async () => {
     console.log(exercise, "exercixe");
+    console.log(image)
+    if (!image?.name) return alert("Image is required!")
+
+   const res =  await Storage.put(convertToSlug(exercise.name), image);
+   console.log('response =>', res)
   };
+
 
   return (
     <div className="flex h-[calc(100vh-90px)] bg-zinc-50 p-6 gap-6">
@@ -60,13 +98,14 @@ const Exercises = () => {
             <FormInput type="number" value={exercise.duration} onChange={setValues} name="duration" placeholder="Enter estimate duration in seconds" label="Duration (secs)"/>
 
             <div className="relative mb-4">
-              <label for={"images"} className="leading-7 text-sm text-gray-600">
+              <label htmlFor={"images"} className="leading-7 text-sm text-gray-600">
                 {" "}
                 Exercise Gif Image{" "}
               </label>
               <input type={"file"}  id={"images"}  name={"images"}
                 placeholder={"Enter exercise GIF image"}
                 onChange={(e) => setimage(e.target.files[0])}
+                accept="image/x-png,image/gif,image/jpeg,image/webp"
                 className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
               />
             </div>
