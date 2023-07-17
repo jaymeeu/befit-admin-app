@@ -20,7 +20,7 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "storage": {
-    "s3befitfitnesstrackerstorage1afc3b94": {
+    "s327d8684a": {
       "BucketName": "string",
       "Region": "string"
     }

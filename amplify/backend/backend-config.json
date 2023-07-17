@@ -51,7 +51,7 @@
     }
   },
   "storage": {
-    "s3befitfitnesstrackerstorage1afc3b94": {
+    "s327d8684a": {
       "dependsOn": [],
       "providerPlugin": "awscloudformation",
       "service": "S3"

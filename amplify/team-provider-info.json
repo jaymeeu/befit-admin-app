@@ -15,8 +15,11 @@
       "auth": {
         "befitfitnesstracker": {}
       },
+      "api": {
+        "befitfitnesstracker": {}
+      },
       "storage": {
-        "s3befitfitnesstrackerstorage1afc3b94": {}
+        "s327d8684a": {}
       }
     }
   }
