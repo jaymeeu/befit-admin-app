@@ -1,0 +1,77 @@
+ <>
+          <div className=" bg-white rounded-lg p-8 flex flex-col  w-full  relative z-10 shadow-md">
+            <h2 className="text-gray-900 text-lg mb-1 font-medium title-font">
+             {
+              editMode ? "Edit execrise" : "Add new execrise"
+             }
+            </h2>
+            <FormInput
+              type="text"
+              value={exercise.name}
+              onChange={setValues}
+              name="name"
+              placeholder="Enter exercise name"
+              label="Exercise name"
+            />
+            <FormInput
+              type="number"
+              value={exercise.reps}
+              onChange={setValues}
+              name="reps"
+              placeholder="Enter number of reps"
+              label="Reps"
+            />
+            <FormInput
+              type="number"
+              value={exercise.sets}
+              onChange={setValues}
+              name="sets"
+              placeholder="Enter number of sets"
+              label="Sets"
+            />
+            <FormInput
+              type="number"
+              value={exercise.duration}
+              onChange={setValues}
+              name="duration"
+              placeholder="Enter estimate duration in seconds"
+              label="Duration (secs)"
+            />
+
+            <div className="relative ">
+              <label
+                htmlFor={"images"}
+                className="leading-7 text-sm text-gray-600"
+              >
+                {" "}
+                Exercise Gif Image{" "}
+              </label>
+              <input
+                type={"file"}
+                id={"images"}
+                name={"images"}
+                placeholder={"Enter exercise GIF image"}
+                onChange={(e) => setimage(e.target.files[0])}
+                accept="image/x-png,image/gif,image/jpeg,image/webp"
+                className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+              />
+            </div>
+             {
+              editMode ? 
+              <button
+              onClick={handleUpdateSubmit}
+              className="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+            >
+              Update exercise
+            </button>
+            :
+            <button
+            onClick={handleSubmit}
+            className="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+          >
+            Add
+          </button>
+             }
+           
+          </div>
+          </>

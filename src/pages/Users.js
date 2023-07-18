@@ -9,7 +9,6 @@ const Users = () => {
     try {
       const users = await DataStore.query(User);
       setusers(users);
-      console.log(users, " users users users ");
     } catch (error) {
       console.log(error, "eoorr");
     }

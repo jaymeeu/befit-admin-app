@@ -15,6 +15,40 @@ export enum Level {
 
 
 
+type EagerProgress = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Progress, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly workout_id?: string | null;
+  readonly total_exercise?: number | null;
+  readonly completed_exercise_ids?: (string | null)[] | null;
+  readonly userID: string;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyProgress = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Progress, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly workout_id?: string | null;
+  readonly total_exercise?: number | null;
+  readonly completed_exercise_ids?: (string | null)[] | null;
+  readonly userID: string;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type Progress = LazyLoading extends LazyLoadingDisabled ? EagerProgress : LazyProgress
+
+export declare const Progress: (new (init: ModelInit<Progress>) => Progress) & {
+  copyOf(source: Progress, mutator: (draft: MutableModel<Progress>) => MutableModel<Progress> | void): Progress;
+}
+
 type EagerUser = {
   readonly [__modelMeta__]: {
     identifier: ManagedIdentifier<User, 'id'>;
@@ -26,10 +60,10 @@ type EagerUser = {
   readonly age?: number | null;
   readonly height?: string | null;
   readonly weight?: string | null;
-  readonly workouts?: (Workout | null)[] | null;
   readonly sub: string;
   readonly gender?: Gender | keyof typeof Gender | null;
   readonly isAdmin: boolean;
+  readonly Progresses?: (Progress | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -45,10 +79,10 @@ type LazyUser = {
   readonly age?: number | null;
   readonly height?: string | null;
   readonly weight?: string | null;
-  readonly workouts: AsyncCollection<Workout>;
   readonly sub: string;
   readonly gender?: Gender | keyof typeof Gender | null;
   readonly isAdmin: boolean;
+  readonly Progresses: AsyncCollection<Progress>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -66,18 +100,14 @@ type EagerWorkout = {
   };
   readonly id: string;
   readonly title: string;
-  readonly description: string;
-  readonly date: string;
+  readonly description?: string | null;
   readonly duration: number;
-  readonly caloriesBurned: number;
-  readonly exercises?: (Exercise | null)[] | null;
-  readonly userID: string;
+  readonly caloriesBurned?: number | null;
   readonly level: Level | keyof typeof Level;
-  readonly progress?: number | null;
   readonly expectedResult?: (string | null)[] | null;
   readonly focus?: (string | null)[] | null;
-  readonly days_completed?: number | null;
   readonly image: string;
+  readonly exercises?: (string | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -89,18 +119,14 @@ type LazyWorkout = {
   };
   readonly id: string;
   readonly title: string;
-  readonly description: string;
-  readonly date: string;
+  readonly description?: string | null;
   readonly duration: number;
-  readonly caloriesBurned: number;
-  readonly exercises: AsyncCollection<Exercise>;
-  readonly userID: string;
+  readonly caloriesBurned?: number | null;
   readonly level: Level | keyof typeof Level;
-  readonly progress?: number | null;
   readonly expectedResult?: (string | null)[] | null;
   readonly focus?: (string | null)[] | null;
-  readonly days_completed?: number | null;
   readonly image: string;
+  readonly exercises?: (string | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -122,7 +148,6 @@ type EagerExercise = {
   readonly reps: number;
   readonly duration: number;
   readonly image?: string | null;
-  readonly workoutID?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -138,7 +163,6 @@ type LazyExercise = {
   readonly reps: number;
   readonly duration: number;
   readonly image?: string | null;
-  readonly workoutID?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -147,36 +171,4 @@ export declare type Exercise = LazyLoading extends LazyLoadingDisabled ? EagerEx
 
 export declare const Exercise: (new (init: ModelInit<Exercise>) => Exercise) & {
   copyOf(source: Exercise, mutator: (draft: MutableModel<Exercise>) => MutableModel<Exercise> | void): Exercise;
-}
-
-type EagerAchievement = {
-  readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<Achievement, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
-  };
-  readonly id: string;
-  readonly name: string;
-  readonly description: string;
-  readonly earnedDate: string;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-}
-
-type LazyAchievement = {
-  readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<Achievement, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
-  };
-  readonly id: string;
-  readonly name: string;
-  readonly description: string;
-  readonly earnedDate: string;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-}
-
-export declare type Achievement = LazyLoading extends LazyLoadingDisabled ? EagerAchievement : LazyAchievement
-
-export declare const Achievement: (new (init: ModelInit<Achievement>) => Achievement) & {
-  copyOf(source: Achievement, mutator: (draft: MutableModel<Achievement>) => MutableModel<Achievement> | void): Achievement;
 }

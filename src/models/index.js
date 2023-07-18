@@ -13,13 +13,13 @@ const Level = {
   "ADVANCED": "ADVANCED"
 };
 
-const { User, Workout, Exercise, Achievement } = initSchema(schema);
+const { Progress, User, Workout, Exercise } = initSchema(schema);
 
 export {
+  Progress,
   User,
   Workout,
   Exercise,
-  Achievement,
   Gender,
   Level
 };

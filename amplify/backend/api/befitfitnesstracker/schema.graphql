@@ -1,3 +1,11 @@
+type Progress @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  workout_id: String
+  total_exercise: Int
+  completed_exercise_ids: [String]
+  userID: ID! @index(name: "byUser")
+}
+
 enum Gender {
   MALE
   FEMALE
@@ -16,28 +24,23 @@ type User @model @auth(rules: [{allow: public}]) {
   age: Int
   height: String
   weight: String
-  workouts: [Workout] @hasMany(indexName: "byUser", fields: ["id"])
-  achievements: [Achievement]
   sub: String!
   gender: Gender
   isAdmin: Boolean!
+  Progresses: [Progress] @hasMany(indexName: "byUser", fields: ["id"])
 }
 
 type Workout @model @auth(rules: [{allow: public}]) {
   id: ID!
   title: String!
-  description: String!
-  date: String!
+  description: String
   duration: Int!
-  caloriesBurned: Int!
-  exercises: [Exercise] @hasMany(indexName: "byWorkout", fields: ["id"])
-  userID: ID! @index(name: "byUser")
+  caloriesBurned: Int
   level: Level!
-  progress: Int
   expectedResult: [String]
   focus: [String]
-  days_completed: Int
   image: String!
+  exercises: [String]
 }
 
 type Exercise @model @auth(rules: [{allow: public}]) {
@@ -47,13 +50,5 @@ type Exercise @model @auth(rules: [{allow: public}]) {
   reps: Int!
   duration: Int!
   image: String
-  workoutID: ID @index(name: "byWorkout")
-}
-
-type Achievement @model @auth(rules: [{allow: public}]) {
-  id: ID!
-  name: String!
-  description: String!
-  earnedDate: String!
 }
  
