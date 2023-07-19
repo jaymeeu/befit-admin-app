@@ -108,6 +108,8 @@ type EagerWorkout = {
   readonly focus?: (string | null)[] | null;
   readonly image: string;
   readonly exercises?: (string | null)[] | null;
+  readonly isPro?: boolean | null;
+  readonly isSpecial?: boolean | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -127,6 +129,8 @@ type LazyWorkout = {
   readonly focus?: (string | null)[] | null;
   readonly image: string;
   readonly exercises?: (string | null)[] | null;
+  readonly isPro?: boolean | null;
+  readonly isSpecial?: boolean | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }

@@ -5,7 +5,7 @@
  **************************************************************************/
 
 import * as React from "react";
-import { GridProps, SelectFieldProps, TextFieldProps } from "@aws-amplify/ui-react";
+import { GridProps, SelectFieldProps, SwitchFieldProps, TextFieldProps } from "@aws-amplify/ui-react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
 import { Workout } from "../models";
 export declare type ValidationResponse = {
@@ -23,6 +23,8 @@ export declare type WorkoutUpdateFormInputValues = {
     focus?: string[];
     image?: string;
     exercises?: string[];
+    isPro?: boolean;
+    isSpecial?: boolean;
 };
 export declare type WorkoutUpdateFormValidationValues = {
     title?: ValidationFunction<string>;
@@ -34,6 +36,8 @@ export declare type WorkoutUpdateFormValidationValues = {
     focus?: ValidationFunction<string>;
     image?: ValidationFunction<string>;
     exercises?: ValidationFunction<string>;
+    isPro?: ValidationFunction<boolean>;
+    isSpecial?: ValidationFunction<boolean>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type WorkoutUpdateFormOverridesProps = {
@@ -47,6 +51,8 @@ export declare type WorkoutUpdateFormOverridesProps = {
     focus?: PrimitiveOverrideProps<TextFieldProps>;
     image?: PrimitiveOverrideProps<TextFieldProps>;
     exercises?: PrimitiveOverrideProps<TextFieldProps>;
+    isPro?: PrimitiveOverrideProps<SwitchFieldProps>;
+    isSpecial?: PrimitiveOverrideProps<SwitchFieldProps>;
 } & EscapeHatchProps;
 export declare type WorkoutUpdateFormProps = React.PropsWithChildren<{
     overrides?: WorkoutUpdateFormOverridesProps | undefined | null;

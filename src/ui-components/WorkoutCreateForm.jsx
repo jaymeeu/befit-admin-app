@@ -15,6 +15,7 @@ import {
   Icon,
   ScrollView,
   SelectField,
+  SwitchField,
   Text,
   TextField,
   useTheme,
@@ -205,6 +206,8 @@ export default function WorkoutCreateForm(props) {
     expectedResult: [],
     focus: [],
     exercises: [],
+    isPro: false,
+    isSpecial: false,
   };
   const [title, setTitle] = React.useState(initialValues.title);
   const [description, setDescription] = React.useState(
@@ -221,6 +224,8 @@ export default function WorkoutCreateForm(props) {
   const [focus, setFocus] = React.useState(initialValues.focus);
   const [image, setImage] = React.useState({});
   const [exercises, setExercises] = React.useState(initialValues.exercises);
+  const [isPro, setIsPro] = React.useState(initialValues.isPro);
+  const [isSpecial, setIsSpecial] = React.useState(initialValues.isSpecial);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setTitle(initialValues.title);
@@ -235,6 +240,8 @@ export default function WorkoutCreateForm(props) {
     setImage({});
     setExercises(initialValues.exercises);
     setCurrentExercisesValue("");
+    setIsPro(initialValues.isPro);
+    setIsSpecial(initialValues.isSpecial);
     setErrors({});
   };
   const [currentExpectedResultValue, setCurrentExpectedResultValue] =
@@ -253,6 +260,8 @@ export default function WorkoutCreateForm(props) {
     expectedResult: [],
     focus: [],
     exercises: [],
+    isPro: [],
+    isSpecial: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -320,6 +329,8 @@ export default function WorkoutCreateForm(props) {
           expectedResult,
           focus,
           exercises,
+          isPro,
+          isSpecial,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -391,6 +402,8 @@ export default function WorkoutCreateForm(props) {
               expectedResult,
               focus,
               exercises,
+              isPro,
+              isSpecial,
             };
             const result = onChange(modelFields);
             value = result?.title ?? value;
@@ -422,6 +435,8 @@ export default function WorkoutCreateForm(props) {
               expectedResult,
               focus,
               exercises,
+              isPro,
+              isSpecial
             };
             const result = onChange(modelFields);
             value = result?.description ?? value;
@@ -457,6 +472,8 @@ export default function WorkoutCreateForm(props) {
               expectedResult,
               focus,
               exercises,
+              isPro,
+              isSpecial
             };
             const result = onChange(modelFields);
             value = result?.duration ?? value;
@@ -492,6 +509,8 @@ export default function WorkoutCreateForm(props) {
               expectedResult,
               focus,
               exercises,
+              isPro,
+              isSpecial
             };
             const result = onChange(modelFields);
             value = result?.caloriesBurned ?? value;
@@ -523,6 +542,8 @@ export default function WorkoutCreateForm(props) {
               expectedResult,
               focus,
               exercises,
+              isPro,
+              isSpecial
             };
             const result = onChange(modelFields);
             value = result?.level ?? value;
@@ -566,6 +587,8 @@ export default function WorkoutCreateForm(props) {
               expectedResult: values,
               focus,
               exercises,
+              isPro,
+              isSpecial
             };
             const result = onChange(modelFields);
             values = result?.expectedResult ?? values;
@@ -619,7 +642,10 @@ export default function WorkoutCreateForm(props) {
               level,
               expectedResult,
               focus: values,
+              focus,
               exercises,
+              isPro,
+              isSpecial
             };
             const result = onChange(modelFields);
             values = result?.focus ?? values;
@@ -689,6 +715,8 @@ export default function WorkoutCreateForm(props) {
               expectedResult,
               focus,
               exercises: values,
+              isPro,
+              isSpecial
             };
             const result = onChange(modelFields);
             values = result?.exercises ?? values;
@@ -739,30 +767,77 @@ export default function WorkoutCreateForm(props) {
           }
           
         </SelectField>
-
-
-
-        {/* <TextField
-          label="Exercises"
-          isRequired={false}
-          isReadOnly={false}
-          value={currentExercisesValue}
-          onChange={(e) => {
-            let { value } = e.target;
-            if (errors.exercises?.hasError) {
-              runValidationTasks("exercises", value);
-            }
-            setCurrentExercisesValue(value);
-          }}
-          onBlur={() => runValidationTasks("exercises", currentExercisesValue)}
-          errorMessage={errors.exercises?.errorMessage}
-          hasError={errors.exercises?.hasError}
-          ref={exercisesRef}
-          labelHidden={true}
-          {...getOverrideProps(overrides, "exercises")}
-        ></TextField> */}
-
       </ArrayField>
+
+      <SwitchField
+        label="Is pro"
+        defaultChecked={false}
+        isDisabled={false}
+        isChecked={isPro}
+        onChange={(e) => {
+          let value = e.target.checked;
+          if (onChange) {
+            const modelFields = {
+              title,
+              description,
+              duration,
+              caloriesBurned,
+              level,
+              expectedResult,
+              focus,
+              image,
+              exercises,
+              isPro: value,
+              isSpecial,
+            };
+            const result = onChange(modelFields);
+            value = result?.isPro ?? value;
+          }
+          if (errors.isPro?.hasError) {
+            runValidationTasks("isPro", value);
+          }
+          setIsPro(value);
+        }}
+        onBlur={() => runValidationTasks("isPro", isPro)}
+        errorMessage={errors.isPro?.errorMessage}
+        hasError={errors.isPro?.hasError}
+        {...getOverrideProps(overrides, "isPro")}
+      ></SwitchField>
+      
+      <SwitchField
+        label="Is special"
+        defaultChecked={false}
+        isDisabled={false}
+        isChecked={isSpecial}
+        onChange={(e) => {
+          let value = e.target.checked;
+          if (onChange) {
+            const modelFields = {
+              title,
+              description,
+              duration,
+              caloriesBurned,
+              level,
+              expectedResult,
+              focus,
+              image,
+              exercises,
+              isPro,
+              isSpecial: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.isSpecial ?? value;
+          }
+          if (errors.isSpecial?.hasError) {
+            runValidationTasks("isSpecial", value);
+          }
+          setIsSpecial(value);
+        }}
+        onBlur={() => runValidationTasks("isSpecial", isSpecial)}
+        errorMessage={errors.isSpecial?.errorMessage}
+        hasError={errors.isSpecial?.hasError}
+        {...getOverrideProps(overrides, "isSpecial")}
+      ></SwitchField>
 
       <Flex
         justifyContent="space-between"

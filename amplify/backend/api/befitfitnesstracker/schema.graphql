@@ -41,6 +41,8 @@ type Workout @model @auth(rules: [{allow: public}]) {
   focus: [String]
   image: String!
   exercises: [String]
+  isPro: Boolean
+  isSpecial: Boolean
 }
 
 type Exercise @model @auth(rules: [{allow: public}]) {

@@ -294,6 +294,20 @@ export const schema = {
                     "attributes": [],
                     "isArrayNullable": true
                 },
+                "isPro": {
+                    "name": "isPro",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "isSpecial": {
+                    "name": "isSpecial",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -443,5 +457,5 @@ export const schema = {
     },
     "nonModels": {},
     "codegenVersion": "3.4.4",
-    "version": "57763b8e11ca89d39381208d17217424"
+    "version": "a87f030ed45565d7f4a197d3c40899c2"
 };

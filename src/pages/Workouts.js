@@ -172,6 +172,15 @@ const Workouts = () => {
               </span>
             </div>
 
+            <div className="p-3 mb-2 border-b border-gray-200">
+              <span className="font-semibold text-base text-gray-800">
+                Is PRO:{" "}
+              </span>
+              <span className=" text-base text-gray-600">
+                {clicked.isPro}
+              </span>
+            </div>
+
             {clicked.focus.length > 0 && (
               <div className="p-3 mb-2 border-b border-gray-200 flex gap-2">
                 <span className="font-semibold text-base text-gray-800">

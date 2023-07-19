@@ -15,14 +15,15 @@ import {
   Icon,
   ScrollView,
   SelectField,
+  SwitchField,
   Text,
   TextField,
   useTheme,
 } from "@aws-amplify/ui-react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Exercise, Workout } from "../models";
+import { Workout } from "../models";
 import { fetchByPath, validateField } from "./utils";
-import { DataStore, Storage } from "aws-amplify";
+import { DataStore } from "aws-amplify";
 function ArrayField({
   items = [],
   onChange,
@@ -52,13 +53,11 @@ function ArrayField({
       inputFieldRef?.current?.focus();
     }
   }, [isEditing]);
-
   const removeItem = async (removeIndex) => {
     const newItems = items.filter((value, index) => index !== removeIndex);
     await onChange(newItems);
     setSelectedBadgeIndex(undefined);
   };
-
   const addItem = async () => {
     if (
       currentFieldValue !== undefined &&
@@ -136,7 +135,6 @@ function ArrayField({
       </React.Fragment>
     );
   }
-
   return (
     <React.Fragment>
       {labelElement}
@@ -193,7 +191,6 @@ export default function WorkoutCreateForm(props) {
     onValidate,
     onChange,
     overrides,
-    onAddSuccess,
     ...rest
   } = props;
   const initialValues = {
@@ -204,7 +201,10 @@ export default function WorkoutCreateForm(props) {
     level: "",
     expectedResult: [],
     focus: [],
+    image: "",
     exercises: [],
+    isPro: false,
+    isSpecial: false,
   };
   const [title, setTitle] = React.useState(initialValues.title);
   const [description, setDescription] = React.useState(
@@ -219,8 +219,10 @@ export default function WorkoutCreateForm(props) {
     initialValues.expectedResult
   );
   const [focus, setFocus] = React.useState(initialValues.focus);
-  const [image, setImage] = React.useState({});
+  const [image, setImage] = React.useState(initialValues.image);
   const [exercises, setExercises] = React.useState(initialValues.exercises);
+  const [isPro, setIsPro] = React.useState(initialValues.isPro);
+  const [isSpecial, setIsSpecial] = React.useState(initialValues.isSpecial);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setTitle(initialValues.title);
@@ -232,9 +234,11 @@ export default function WorkoutCreateForm(props) {
     setCurrentExpectedResultValue("");
     setFocus(initialValues.focus);
     setCurrentFocusValue("");
-    setImage({});
+    setImage(initialValues.image);
     setExercises(initialValues.exercises);
     setCurrentExercisesValue("");
+    setIsPro(initialValues.isPro);
+    setIsSpecial(initialValues.isSpecial);
     setErrors({});
   };
   const [currentExpectedResultValue, setCurrentExpectedResultValue] =
@@ -252,7 +256,10 @@ export default function WorkoutCreateForm(props) {
     level: [{ type: "Required" }],
     expectedResult: [],
     focus: [],
+    image: [{ type: "Required" }],
     exercises: [],
+    isPro: [],
+    isSpecial: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -271,34 +278,6 @@ export default function WorkoutCreateForm(props) {
     setErrors((errors) => ({ ...errors, [fieldName]: validationResponse }));
     return validationResponse;
   };
-
-  const convertToSlug = (input) => {
-    let slug = input.toLowerCase();
-    slug = slug.replace(/[^\w\s-]/g, "");
-    slug = slug.replace(/\s+/g, "-");
-    slug = slug.replace(/--+/g, "-");
-    slug = slug.replace(/^-+|-+$/g, "");
-    const randomString = Math.random().toString(36).substring(2, 6);
-    const finalSlug = `${slug}-${randomString}`;
-    return finalSlug;
-  };
-
-  const [allExercises, setAllExercises] = React.useState([])
-  
-  const fetchExercise = async () =>{
-    try {
-      const res = await DataStore.query(Exercise)
-      setAllExercises(res)
-    }
-    catch(err){
-
-    }
-  }
-
-  React.useEffect(() => {
-    fetchExercise()
-  }, []);
-
   return (
     <Grid
       as="form"
@@ -307,10 +286,6 @@ export default function WorkoutCreateForm(props) {
       padding="20px"
       onSubmit={async (event) => {
         event.preventDefault();
-        if (!image?.name) { return alert('Image is required !') }
-
-        const imageKey = convertToSlug(name);
-
         let modelFields = {
           title,
           description,
@@ -319,7 +294,10 @@ export default function WorkoutCreateForm(props) {
           level,
           expectedResult,
           focus,
+          image,
           exercises,
+          isPro,
+          isSpecial,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -349,16 +327,7 @@ export default function WorkoutCreateForm(props) {
               modelFields[key] = undefined;
             }
           });
-          await Storage.put(imageKey, image);
-
-          const url = `${process.env.REACT_APP_S3_URL}/${imageKey}`
-
-          modelFields.image = url
-
-          await DataStore.save(new Workout(modelFields))
-            .then(() => {
-              onAddSuccess()
-            })
+          await DataStore.save(new Workout(modelFields));
           if (onSuccess) {
             onSuccess(modelFields);
           }
@@ -390,7 +359,10 @@ export default function WorkoutCreateForm(props) {
               level,
               expectedResult,
               focus,
+              image,
               exercises,
+              isPro,
+              isSpecial,
             };
             const result = onChange(modelFields);
             value = result?.title ?? value;
@@ -421,7 +393,10 @@ export default function WorkoutCreateForm(props) {
               level,
               expectedResult,
               focus,
+              image,
               exercises,
+              isPro,
+              isSpecial,
             };
             const result = onChange(modelFields);
             value = result?.description ?? value;
@@ -456,7 +431,10 @@ export default function WorkoutCreateForm(props) {
               level,
               expectedResult,
               focus,
+              image,
               exercises,
+              isPro,
+              isSpecial,
             };
             const result = onChange(modelFields);
             value = result?.duration ?? value;
@@ -491,7 +469,10 @@ export default function WorkoutCreateForm(props) {
               level,
               expectedResult,
               focus,
+              image,
               exercises,
+              isPro,
+              isSpecial,
             };
             const result = onChange(modelFields);
             value = result?.caloriesBurned ?? value;
@@ -522,7 +503,10 @@ export default function WorkoutCreateForm(props) {
               level: value,
               expectedResult,
               focus,
+              image,
               exercises,
+              isPro,
+              isSpecial,
             };
             const result = onChange(modelFields);
             value = result?.level ?? value;
@@ -565,7 +549,10 @@ export default function WorkoutCreateForm(props) {
               level,
               expectedResult: values,
               focus,
+              image,
               exercises,
+              isPro,
+              isSpecial,
             };
             const result = onChange(modelFields);
             values = result?.expectedResult ?? values;
@@ -603,10 +590,7 @@ export default function WorkoutCreateForm(props) {
           labelHidden={true}
           {...getOverrideProps(overrides, "expectedResult")}
         ></TextField>
-
-
       </ArrayField>
-
       <ArrayField
         onChange={async (items) => {
           let values = items;
@@ -619,7 +603,10 @@ export default function WorkoutCreateForm(props) {
               level,
               expectedResult,
               focus: values,
+              image,
               exercises,
+              isPro,
+              isSpecial,
             };
             const result = onChange(modelFields);
             values = result?.focus ?? values;
@@ -656,26 +643,40 @@ export default function WorkoutCreateForm(props) {
           {...getOverrideProps(overrides, "focus")}
         ></TextField>
       </ArrayField>
-
-      <div className="relative ">
-        <label
-          htmlFor={"images"}
-          className="leading-7 text-sm text-gray-600"
-        >
-          {" "}
-          Exercise Gif Image{" "}
-        </label>
-        <input
-          type={"file"}
-          id={"images"}
-          name={"images"}
-          placeholder={"Enter exercise GIF image"}
-          onChange={(e) => setImage(e.target.files[0])}
-          accept="image/x-png,image/gif,image/jpeg,image/webp"
-          className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-        />
-      </div>
-
+      <TextField
+        label="Image"
+        isRequired={true}
+        isReadOnly={false}
+        value={image}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              title,
+              description,
+              duration,
+              caloriesBurned,
+              level,
+              expectedResult,
+              focus,
+              image: value,
+              exercises,
+              isPro,
+              isSpecial,
+            };
+            const result = onChange(modelFields);
+            value = result?.image ?? value;
+          }
+          if (errors.image?.hasError) {
+            runValidationTasks("image", value);
+          }
+          setImage(value);
+        }}
+        onBlur={() => runValidationTasks("image", image)}
+        errorMessage={errors.image?.errorMessage}
+        hasError={errors.image?.hasError}
+        {...getOverrideProps(overrides, "image")}
+      ></TextField>
       <ArrayField
         onChange={async (items) => {
           let values = items;
@@ -688,7 +689,10 @@ export default function WorkoutCreateForm(props) {
               level,
               expectedResult,
               focus,
+              image,
               exercises: values,
+              isPro,
+              isSpecial,
             };
             const result = onChange(modelFields);
             values = result?.exercises ?? values;
@@ -705,44 +709,7 @@ export default function WorkoutCreateForm(props) {
         inputFieldRef={exercisesRef}
         defaultFieldValue={""}
       >
-
-        <SelectField
-          label="Exercises"
-          isRequired={false}
-          isReadOnly={false}
-          value={currentExercisesValue}
-          onChange={(e) => {
-
-            let { value } = e.target;
-            if (errors.exercises?.hasError) {
-              runValidationTasks("exercises", value);
-            }
-            setCurrentExercisesValue(value);
-          }}
-          onBlur={() => runValidationTasks("exercises", currentExercisesValue)}
-          errorMessage={errors.exercises?.errorMessage}
-          hasError={errors.exercises?.hasError}
-          ref={exercisesRef}
-          labelHidden={true}
-          {...getOverrideProps(overrides, "exercises")}
-          placeholder="Please select an option"
-          isDisabled={false}
-
-        >
-          {
-            allExercises.map((exerc)=>(
-              <option
-              children={exerc?.name}
-              value={exerc?.id}
-            ></option>
-            ))
-          }
-          
-        </SelectField>
-
-
-
-        {/* <TextField
+        <TextField
           label="Exercises"
           isRequired={false}
           isReadOnly={false}
@@ -760,10 +727,76 @@ export default function WorkoutCreateForm(props) {
           ref={exercisesRef}
           labelHidden={true}
           {...getOverrideProps(overrides, "exercises")}
-        ></TextField> */}
-
+        ></TextField>
       </ArrayField>
-
+      <SwitchField
+        label="Is pro"
+        defaultChecked={false}
+        isDisabled={false}
+        isChecked={isPro}
+        onChange={(e) => {
+          let value = e.target.checked;
+          if (onChange) {
+            const modelFields = {
+              title,
+              description,
+              duration,
+              caloriesBurned,
+              level,
+              expectedResult,
+              focus,
+              image,
+              exercises,
+              isPro: value,
+              isSpecial,
+            };
+            const result = onChange(modelFields);
+            value = result?.isPro ?? value;
+          }
+          if (errors.isPro?.hasError) {
+            runValidationTasks("isPro", value);
+          }
+          setIsPro(value);
+        }}
+        onBlur={() => runValidationTasks("isPro", isPro)}
+        errorMessage={errors.isPro?.errorMessage}
+        hasError={errors.isPro?.hasError}
+        {...getOverrideProps(overrides, "isPro")}
+      ></SwitchField>
+      <SwitchField
+        label="Is special"
+        defaultChecked={false}
+        isDisabled={false}
+        isChecked={isSpecial}
+        onChange={(e) => {
+          let value = e.target.checked;
+          if (onChange) {
+            const modelFields = {
+              title,
+              description,
+              duration,
+              caloriesBurned,
+              level,
+              expectedResult,
+              focus,
+              image,
+              exercises,
+              isPro,
+              isSpecial: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.isSpecial ?? value;
+          }
+          if (errors.isSpecial?.hasError) {
+            runValidationTasks("isSpecial", value);
+          }
+          setIsSpecial(value);
+        }}
+        onBlur={() => runValidationTasks("isSpecial", isSpecial)}
+        errorMessage={errors.isSpecial?.errorMessage}
+        hasError={errors.isSpecial?.hasError}
+        {...getOverrideProps(overrides, "isSpecial")}
+      ></SwitchField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}
