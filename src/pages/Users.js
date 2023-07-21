@@ -72,6 +72,11 @@ const Users = () => {
             {clickedUser?.weight}
           </span>
         </div>
+        {clickedUser?.isAdmin && (
+          <div className="p-3 mb-2 border-b border-gray-200">
+            <span className=" p-2 bg-blue-200 text-blue-800 text-base font-bold rounded-full">Admin</span>
+          </div>
+        )}
       </div>
     </div>
   );

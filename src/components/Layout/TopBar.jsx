@@ -2,6 +2,7 @@ import {  useState } from "react";
 
 import { useLocation, useNavigate } from "react-router-dom";
 import { FiLogOut } from 'react-icons/fi'
+import { Auth } from "aws-amplify";
 
 export default function TopBar({ showNav }) {
 
@@ -40,7 +41,7 @@ export default function TopBar({ showNav }) {
                         Abdulrasaq
                     </span>
                 </div>
-                <div className="px-6  text-red-500 cursor-pointer flex items-center">
+                <div onClick={()=>Auth.signOut()} className="px-6  text-red-500 cursor-pointer flex items-center">
                     <FiLogOut />
                     <span>Logout</span>
                 </div>
