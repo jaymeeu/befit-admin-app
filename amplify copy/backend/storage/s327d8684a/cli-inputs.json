@@ -1,0 +1,16 @@
+{
+  "resourceName": "s327d8684a",
+  "policyUUID": "27d8684a",
+  "bucketName": "befitfitnesstrackere76cd36965514a57a87ce95be0c9",
+  "storageAccess": "authAndGuest",
+  "guestAccess": [
+    "READ"
+  ],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}

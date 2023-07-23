@@ -1,0 +1,56 @@
+type Progress @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  workout_id: String
+  total_exercise: Int
+  completed_exercise_ids: [String]
+  userID: ID! @index(name: "byUser")
+}
+
+enum Gender {
+  MALE
+  FEMALE
+}
+
+enum Level {
+  BASIC
+  INTERMEDIATE
+  ADVANCED
+}
+
+type User @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String
+  email: String!
+  age: Int
+  height: String
+  weight: String
+  sub: String!
+  gender: Gender
+  isAdmin: Boolean!
+  Progresses: [Progress] @hasMany(indexName: "byUser", fields: ["id"])
+}
+
+type Workout @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  title: String!
+  description: String
+  duration: Int!
+  caloriesBurned: Int
+  level: Level!
+  expectedResult: [String]
+  focus: [String]
+  image: String!
+  exercises: [String]
+  isPro: Boolean
+  isSpecial: Boolean
+}
+
+type Exercise @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String!
+  sets: Int!
+  reps: Int!
+  duration: Int!
+  image: String
+}
+ 

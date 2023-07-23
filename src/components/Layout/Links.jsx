@@ -1,10 +1,9 @@
 import React from 'react'
 import { FiPieChart } from 'react-icons/fi'
 import { NavLink } from "react-router-dom";
-import { HiChartPie, HiOutlineSpeakerphone, HiSpeakerphone } from 'react-icons/hi'
-import { MdShowChart } from 'react-icons/md'
-import { FaRegUser, FaRegUserCircle, FaUserCircle, FaUserAlt} from 'react-icons/fa'
-import { FiBox, FiCodesandbox } from 'react-icons/fi'
+import { HiChartPie} from 'react-icons/hi'
+import { GrWorkshop } from 'react-icons/gr'
+import { FaRegUser, FaUserAlt, FaRunning} from 'react-icons/fa'
 
 const Links = ({ showNav, path }) => {
 
@@ -60,28 +59,18 @@ export const links = [
     {
         title: "Exercises",
         to: '/exercises',
-        icon: <MdShowChart size={22} className=" text-gray-700 cursor-pointer" />,
-        active_icon: <MdShowChart size={24} className=" text-black cursor-pointer" />,
+        icon: <GrWorkshop size={22} className=" text-gray-700 cursor-pointer" />,
+        active_icon: <GrWorkshop size={24} className=" text-black cursor-pointer" />,
     },
    
     {
         title: "Workouts",
         to: '/workouts',
-        icon: <HiOutlineSpeakerphone size={22} className=" text-gray-700 cursor-pointer" />,
-        active_icon: <HiSpeakerphone size={24} className=" text-black cursor-pointer" />,
+        icon: <FaRunning size={22} className=" text-gray-700 cursor-pointer" />,
+        active_icon: <FaRunning size={24} className=" text-black cursor-pointer" />,
     },
-    {
-        title: "App",
-        to: '/app',
-        icon: <FiBox size={22} className=" text-gray-700 cursor-pointer" />,
-        active_icon: <FiCodesandbox size={24} className=" text-black cursor-pointer" />,
-    },
-    {
-        title: "Admins",
-        to: '/admins',
-        icon: <FaRegUserCircle size={22} className=" text-gray-700 cursor-pointer" />,
-        active_icon: <FaUserCircle size={24} className=" text-black cursor-pointer" />,
-    },
+   
+    
     
 ]
 
