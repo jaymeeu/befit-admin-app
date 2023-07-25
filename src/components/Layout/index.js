@@ -2,7 +2,7 @@ import { useState, useEffect, Fragment } from "react";
 import TopBar from "./TopBar";
 import SideBar from "./SideBar";
 
-export default function Layout({ children }) {
+export default function Layout({ children, user }) {
   const [showNav, setShowNav] = useState(true);
   // const [isMobile, setIsMobile] = useState(false);
 
@@ -31,7 +31,7 @@ const isMobile = width <= 768;
  
   return (
     <>
-      <TopBar showNav={showNav} setShowNav={setShowNav} />
+      <TopBar user={user} showNav={showNav}  />
       
       <SideBar showNav={showNav} isMobile={isMobile} setShowNav={setShowNav} />
      

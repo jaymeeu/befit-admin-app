@@ -1,27 +1,9 @@
 import {  useState } from "react";
 
-import { useLocation, useNavigate } from "react-router-dom";
 import { FiLogOut } from 'react-icons/fi'
 import { Auth } from "aws-amplify";
 
-export default function TopBar({ showNav }) {
-
-    const navigation = useNavigate()
-
-    const [showLogout, setShowLogout] = useState(null);
-    const openLogout = Boolean(showLogout);
-    const handleClickLogout = (event) => {
-        setShowLogout(event.currentTarget);
-    };
-
-    const [showSkill, setShowSkill] = useState(null);
-    const openSkill = Boolean(showSkill);
-    const handleClickSkill = (event) => {
-        setShowSkill(event.currentTarget);
-    };
-    const handleCloseSkill = () => {
-        setShowSkill(null);
-    };
+export default function TopBar({ showNav, user }) {
 
 
     return (
@@ -30,15 +12,16 @@ export default function TopBar({ showNav }) {
         >
             <div className=" w-full text-center text-lg font-bold py-2 px-3 text-gray-700  " >
                 BEFIT CMS
-
-
             </div>
 
             <div className="flex items-center pr-4 md:pr-16 gap-6">
 
-                <div onClick={handleClickLogout} className="flex gap-2 items-center cursor-pointer select-none">
+                <div className="flex gap-2 items-center cursor-pointer select-none">
                     <span className="font-cap ">
-                        Abdulrasaq
+                        {user?.name}
+                        {/* {
+                            console.log(dbUser,"dbUser")
+                        } */}
                     </span>
                 </div>
                 <div onClick={()=>Auth.signOut()} className="px-6  text-red-500 cursor-pointer flex items-center">
