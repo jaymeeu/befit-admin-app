@@ -41,7 +41,6 @@ const App = () => {
   useEffect(() => {
     checkuser();
 
-    // Auth.signOut()
   }, []);
 
   return (
