@@ -1,6 +1,6 @@
 import { HiMenuAlt3 } from 'react-icons/hi'
-import blakskill from '../../assets/pushup.jpeg'
-import icon from '../../assets/pushup.jpeg'
+import blakskill from '../../assets/logo.png'
+import icon from '../../assets/logo.png'
 import Links from './Links';
 import { useLocation, useNavigate } from 'react-router-dom';
 

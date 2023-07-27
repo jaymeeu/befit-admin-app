@@ -26,7 +26,7 @@ const Links = ({ showNav, path }) => {
                                
                                 {
                                     showNav &&
-                                    <span className={`${isActive  ? "text-black text-base font-semibold" : link.title === "Transaction" && path === '/singletransaction' || isActive ? "text-black text-base font-semibold" : "text-gray-700"} font-work`}>
+                                    <span className={`${isActive  ? "text-black text-base font-semibold" : "text-gray-700"} font-work`}>
                                         {link.title}
                                     </span>
                                 }

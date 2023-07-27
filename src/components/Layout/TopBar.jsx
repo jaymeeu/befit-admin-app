@@ -1,5 +1,3 @@
-import {  useState } from "react";
-
 import { FiLogOut } from 'react-icons/fi'
 import { Auth } from "aws-amplify";
 

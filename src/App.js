@@ -18,7 +18,7 @@ import "@aws-amplify/ui-react/styles.css";
 import "./App.scss";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import logo from './assets/logo.png'
 Amplify.configure(awsconfig);
 
 const App = () => {
@@ -87,8 +87,9 @@ const App = () => {
           padding={tokens.space.large}
         >
           <Image
-            alt="Amplify logo"
-            src="https://docs.amplify.aws/assets/logo-dark.svg"
+          style={{width:120}}
+            alt="Befit logo"
+            src={logo}
           />
         </View>
       );
