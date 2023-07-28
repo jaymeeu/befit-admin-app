@@ -1,0 +1,21 @@
+{
+    "appName": "befitfitnesstrackerPinpoint",
+    "roleName": "pinpointLambdaRole2a0a8c7b",
+    "cloudformationPolicyName": "cloudformationPolicy2a0a8c7b",
+    "cloudWatchPolicyName": "cloudWatchPolicy2a0a8c7b",
+    "pinpointPolicyName": "pinpointPolicy2a0a8c7b",
+    "authPolicyName": "pinpoint_amplify_2a0a8c7b",
+    "unauthPolicyName": "pinpoint_amplify_2a0a8c7b",
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "authRoleArn": {
+        "Fn::GetAtt": [
+            "AuthRole",
+            "Arn"
+        ]
+    }
+}

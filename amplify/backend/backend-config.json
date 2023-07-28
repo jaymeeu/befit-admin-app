@@ -1,4 +1,10 @@
 {
+  "analytics": {
+    "befitfitnesstrackerPinpoint": {
+      "providerPlugin": "awscloudformation",
+      "service": "Pinpoint"
+    }
+  },
   "api": {
     "befitfitnesstracker": {
       "dependsOn": [],
