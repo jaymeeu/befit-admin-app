@@ -3,8 +3,8 @@ import { Exercise } from "../models";
 import { DataStore } from "aws-amplify";
 import { AiOutlineEdit } from "react-icons/ai";
 import { BsFillTrash3Fill } from "react-icons/bs";
-import ExerciseCreateForm from "../ui-components/ExerciseCreateForm";
-import ExerciseUpdateForm from "../ui-components/ExerciseUpdateForm";
+import ExerciseCreateForm from "../ui-comp/ExerciseCreateForm";
+import ExerciseUpdateForm from "../ui-comp/ExerciseUpdateForm";
 
 const Exercises = () => {
   const [all, setAll] = useState([]);
